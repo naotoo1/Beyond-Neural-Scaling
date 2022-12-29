@@ -1,5 +1,5 @@
 # Beyond-Neural-Scaling
- Implementation of beyond nueral scaling beating power laws for both deep models and prototype-based model.
+ Implementation of beyond nueral scaling beating power laws for both deep models and prototype-based models.
  
  
  ## How to use
