@@ -247,8 +247,8 @@ class SSL:
 
     def ssl_kmeans(self, init='k-means++', n_init='auto'):
         embedded_space, image_names = self.get_embedded_space()
-        number_of_clusters = self.get_number_clusters(embedded_space)  #
-        self.number_topology.append(number_of_clusters)  #
+        number_of_clusters = self.get_number_clusters(embedded_space)
+        self.number_topology.append(number_of_clusters)
         self_supervised_learning_model = KMeans(
             n_clusters=number_of_clusters,
             random_state=self.random_state,
@@ -269,19 +269,19 @@ class SSL:
 
     def ssl_fcm(self):
         embedded_space, image_names = self.get_embedded_space()
-        number_of_clusters = self.get_number_clusters(embedded_space)  #
-        self.number_topology.append(number_of_clusters)  #
+        number_of_clusters = self.get_number_clusters(embedded_space)
+        self.number_topology.append(number_of_clusters)
         cntr, u_matrix, u_matrix_init, distance_space, \
             objective_function_history, num_inter_run, \
             fuzzy_partition_coefficient = fuzz.cmeans(
-            data=np.array(embedded_space).transpose(),
-            c=number_of_clusters,
-            m=2,
-            error=0.001,
-            maxiter=1000,
-            init=None,
-            seed=self.random_state
-        )
+                data=np.array(embedded_space).transpose(),
+                c=number_of_clusters,
+                m=2,
+                error=0.001,
+                maxiter=1000,
+                init=None,
+                seed=self.random_state
+            )
         cluster_labels = [np.argmax(i) for i in u_matrix.transpose()]
 
         return distance_space.transpose(), cluster_labels, image_names
@@ -291,13 +291,13 @@ class SSL:
             image_names, cluster_centers, embedded_space = self.ssl_kmeans()
         u_matrix, u_matrix_init, distance_space, object_function_history, \
             num_iter_run, fuzzy_partition_coefficient = cmeans_predict(
-            test_data=np.array(embedded_space).transpose(),
-            cntr_trained=cluster_centers,
-            m=2,
-            error=0.001,
-            maxiter=1000,
-            init=None,
-            seed=self.random_state
+                test_data=np.array(embedded_space).transpose(),
+                cntr_trained=cluster_centers,
+                m=2,
+                error=0.001,
+                maxiter=1000,
+                init=None,
+                seed=self.random_state
         )
 
         cluster_labels = [np.argmax(i) for i in u_matrix.transpose()]
