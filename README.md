@@ -14,9 +14,9 @@ We exemplify practical use cases for TensorFlow object detection for mobile/edge
 
  
  ## How to use
-The implementation covers deep models with illustration for computer vision in the ```dataprune.py``` module. 
+The implementation covers deep models with illustrations for computer vision in the dataprune.py module.
 
-There is also an extension of the implementation to cover ML practitioners in the area of prototype-based models with illustraion for LVQ(s) in the ```dataprune1.py``` module.
+There is also an extension of the implementation to cover ML practitioners in the area of prototype-based models with illustrations for LVQ(s) in the dataprune1.py module.
 
 ```python
 usage: dataprune.py [-h] -m  -n  -x  [-p | -b | -a]
