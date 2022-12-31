@@ -227,7 +227,7 @@ def ssl_growing_neural_gas(x, y=2):
         a=0.5,
         d=0.995,
         passes=y,
-        plot_evolution=False
+        plot_evolution= False
     )
     return gng.number_of_clusters()
 
