@@ -3,15 +3,21 @@
 [![Prototorch: 0.7.5](https://img.shields.io/badge/prototorch-0.7.5-blue.svg)](https://pypi.org/project/prototorch/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
+https://www.tensorflow.org/
+
 
 # Beyond-Neural-Scaling
- Implementation of beyond nueral scaling beating power laws for both deep models and prototype-based models.
- 
+ Implementation of beyond neural scaling beating power laws through data pruning.
+
+The implementaion covers both deep models and prototype-based models and shows how optimal prunning algorithm can transition from power law scaling to an exponionetial law scaling.
+
+We exemplify with practical use case for object detection for mobile/edge devices and also for prototype-based models in the area of learning vector quantization.
+
  
  ## How to use
-The implementation covers deep models with illustration for computer vision (object detection for edge devices) in the ```dataprune.py``` module. 
+The implementation covers deep models with illustration for computer vision in the ```dataprune.py``` module. 
 
-There is also an extension of the implementation to cover ML practioners in the area of prototype-based models with illustraion for LVQ(s) in the ```dataprune1.py``` module.
+There is also an extension of the implementation to cover ML practitioners in the area of prototype-based models with illustraion for LVQ(s) in the ```dataprune1.py``` module.
 
 ```python
 usage: dataprune.py [-h] -m  -n  -x  [-p | -b | -a]
