@@ -3,7 +3,6 @@
 [![Prototorch: 0.7.5](https://img.shields.io/badge/prototorch-0.7.5-blue.svg)](https://pypi.org/project/prototorch/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-https://www.tensorflow.org/
 
 
 # Beyond-Neural-Scaling
