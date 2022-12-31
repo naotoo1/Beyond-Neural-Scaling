@@ -5,7 +5,8 @@
 
 
 
-# Beyond-Neural-Scaling Laws
+# Beyond-Neural-Scaling
+
  Implementation of beyond neural scaling beating power laws through data pruning.
 
 The implementation covers deep learning and prototype-based models and shows how the optimal pruning algorithm can transition from power law scaling to exponential law scaling.
