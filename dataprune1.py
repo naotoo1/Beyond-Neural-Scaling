@@ -409,17 +409,4 @@ class Prune(SSL):
 
 
 if __name__ == '__main__':
-    from sklearn.datasets import load_iris
-
-    X, y = load_iris(return_X_y=True)
-
-    prune: Prune = Prune(
-        prune_type=True,
-        ssl_type='fcm',
-        number_cluster=3,
-        random_state=40,
-        dataset=X,
-    )
-
-    print(prune.get_prune(prune_fraction=0.9, pruned_mode='easy', prune_type='in'))
-    print(prune.get_prune(prune_fraction=0.9, pruned_mode='easy', prune_type='out'))
+    print('import module to use')
