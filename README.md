@@ -8,9 +8,9 @@
 # Beyond-Neural-Scaling
  Implementation of beyond neural scaling beating power laws through data pruning.
 
-The implementaion covers both deep models and prototype-based models and shows how optimal prunning algorithm can transition from power law scaling to an exponionetial law scaling.
+The implementation covers deep learning and prototype-based models and shows how the optimal pruning algorithm can transition from power law scaling to exponential law scaling.
 
-We exemplify with practical use case for object detection for mobile/edge devices and also for prototype-based models in the area of learning vector quantization.
+We exemplify practical use cases for TensorFlow object detection for mobile/edge devices and prototype-based models with learning vector quantization.
 
  
  ## How to use
