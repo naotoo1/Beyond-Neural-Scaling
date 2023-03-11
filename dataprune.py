@@ -12,10 +12,12 @@ from keras.utils import img_to_array
 from skfuzzy import cmeans_predict
 from sklearn.cluster import KMeans
 import skfuzzy as fuzz
+import prosemble as  ps
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
 from gng import GrowingNeuralGas
+
 
 
 def get_extracted_image_features(directory: str):
@@ -227,7 +229,7 @@ def ssl_growing_neural_gas(x, y=2):
         a=0.5,
         d=0.995,
         passes=y,
-        plot_evolution= False
+        plot_evolution=True
     )
     return gng.number_of_clusters()
 
@@ -303,6 +305,163 @@ class SSL:
         cluster_labels = [np.argmax(i) for i in u_matrix.transpose()]
         return distance_space.transpose(), cluster_labels, image_names
 
+    def ssl_pcm(self):
+        embedded_space, image_names = self.get_embedded_space()
+        number_of_clusters = self.get_number_clusters(embedded_space)
+        self.number_topology.append(number_of_clusters)
+        self_supervised_learning_model = ps.models.pcm.PCM(
+            data= embedded_space,
+            c=number_of_clusters,
+            epsilon=0.001,
+            num_iter=1000,
+            m=2,
+            k=1,
+            ord='fro',
+            set_U_matrix='fcm',
+            plot_steps=False
+        )
+        self_supervised_learning_model.fit()
+        cluster_labels = self_supervised_learning_model.predict()
+        distance_space = self_supervised_learning_model.get_distance_space(
+            embedded_space
+        )
+        return distance_space,cluster_labels,image_names
+
+    def ssl_fpcm(self):
+        embedded_space, image_names = self.get_embedded_space()
+        number_of_clusters = self.get_number_clusters(embedded_space)
+        self.number_topology.append(number_of_clusters)
+        self_supervised_learning_model = ps.models.fpcm.FPCM(
+            data=embedded_space,
+            c=number_of_clusters,
+            epsilon=0.001,
+            num_iter=1000,
+            m=2,
+            eta=2,
+            ord=None,
+            set_U_matrix='fcm',
+            plot_steps=False
+        )
+        self_supervised_learning_model.fit()
+        cluster_labels = self_supervised_learning_model.predict()
+        distance_space = self_supervised_learning_model.get_distance_space(
+            embedded_space
+        )
+        return distance_space, cluster_labels, image_names
+
+    def ssl_pfcm(self):
+        embedded_space, image_names = self.get_embedded_space()
+        number_of_clusters = self.get_number_clusters(embedded_space)
+        self.number_topology.append(number_of_clusters)
+        self_supervised_learning_model = ps.models.pfcm.PFCM(
+            data=embedded_space,
+            c=number_of_clusters,
+            epsilon=0.001,
+            num_iter=1000,
+            m=2,
+            k=1,
+            eta=2,
+            a=2,
+            b=2,
+            ord=None,
+            set_U_matrix='fcm',
+            plot_steps=False
+        )
+        self_supervised_learning_model.fit()
+        cluster_labels = self_supervised_learning_model.predict()
+        distance_space = self_supervised_learning_model.get_distance_space(
+            embedded_space
+        )
+        return distance_space, cluster_labels, image_names
+
+    def ssl_ipcm(self):
+        embedded_space, image_names = self.get_embedded_space()
+        number_of_clusters = self.get_number_clusters(embedded_space)
+        self.number_topology.append(number_of_clusters)
+        self_supervised_learning_model = ps.models.ipcm.IPCM1(
+            data=embedded_space,
+            c=number_of_clusters,
+            epsilon=0.001,
+            num_iter=None,
+            m_f=2,
+            m_p=2,
+            k=2,
+            ord=None,
+            set_centroids=None,
+            set_U_matrix='fcm',
+            plot_steps=False
+        )
+        self_supervised_learning_model.fit()
+        cluster_labels = self_supervised_learning_model.predict()
+        distance_space = self_supervised_learning_model.get_distance_space(
+            embedded_space
+        )
+        return distance_space, cluster_labels, image_names
+
+    def ssl_ipcm_2(self):
+        embedded_space, image_names = self.get_embedded_space()
+        number_of_clusters = self.get_number_clusters(embedded_space)
+        self.number_topology.append(number_of_clusters)
+        self_supervised_learning_model = ps.models.ipcm_2.IPCM2(
+            data=embedded_space,
+            c=number_of_clusters,
+            epsilon=0.001,
+            num_iter=1000,
+            m_f=2,
+            m_p=2,
+            ord=None,
+            set_U_matrix='fcm',
+            plot_steps=False
+        )
+        self_supervised_learning_model.fit()
+        cluster_labels = self_supervised_learning_model.predict()
+        distance_space = \
+            self_supervised_learning_model.get_distance_space(embedded_space)
+        return distance_space, cluster_labels, image_names
+
+    def ssl_bgpc(self):
+        embedded_space, image_names = self.get_embedded_space()
+        number_of_clusters = self.get_number_clusters(embedded_space)
+        self.number_topology.append(number_of_clusters)
+        self_supervised_learning_model = ps.models.bgpc.BGPC(
+            data=embedded_space,
+            c=number_of_clusters,
+            epsilon=0.001,
+            num_iter=100,
+            a_f=0.8,
+            b_f=0.004,
+            ord=None,
+            set_centroids=None,
+            set_U_matrix=None,
+            plot_steps=False
+        )
+        self_supervised_learning_model.fit()
+        cluster_labels = self_supervised_learning_model.predict()
+        distance_space = self_supervised_learning_model.get_distance_space(
+            embedded_space
+        )
+        return distance_space, cluster_labels, image_names
+
+    def ssl_hcm(self):
+        embedded_space, image_names = self.get_embedded_space()
+        number_of_clusters = self.get_number_clusters(embedded_space)
+        self.number_topology.append(number_of_clusters)
+        self_supervised_learning_model = ps.models.hcm.Kmeans(
+            data=np.array(embedded_space),
+            c=number_of_clusters,
+            epsilon=0.001,
+            num_inter=1000,
+            ord=None,
+            set_prototypes=None,
+            plot_steps=False
+        )
+        self_supervised_learning_model.fit()
+        cluster_labels = self_supervised_learning_model.predict()
+        distance_space = self_supervised_learning_model.get_distance_space(
+            embedded_space
+        )
+        return distance_space, cluster_labels, image_names
+
     def get_number_clusters(self, x):
         """
 
@@ -362,6 +521,36 @@ class Prune(SSL):
         if self.ssl_type == "fcm_init":
             self.distance_space, self.clustered_labels, \
                 self.clustered_image_names = self.ssl_fcm_init()
+
+        if self.ssl_type == "pcm":
+            self.distance_space, self.clustered_labels, \
+                self.clustered_image_names = self.ssl_pcm()
+
+        if self.ssl_type == "fpcm":
+            self.distance_space, self.clustered_labels, \
+                self.clustered_image_names = self.ssl_fpcm()
+
+        if self.ssl_type == "pfcm":
+            self.distance_space, self.clustered_labels, \
+                self.clustered_image_names = self.ssl_pfcm()
+
+        if self.ssl_type == "ipcm":
+            self.distance_space, self.clustered_labels, \
+                self.clustered_image_names = self.ssl_ipcm()
+
+        if self.ssl_type == "ipcm_2":
+            self.distance_space, self.clustered_labels, \
+                self.clustered_image_names = self.ssl_ipcm_2()
+
+        if self.ssl_type == "bgpc":
+            self.distance_space, self.clustered_labels, \
+                self.clustered_image_names = self.ssl_bgpc()
+
+        if self.ssl_type == "hcm":
+            self.distance_space, self.clustered_labels, \
+                self.clustered_image_names = self.ssl_hcm()
+
+
 
     def get_number_topologies(self):
         """
@@ -436,7 +625,7 @@ def self_supervised_learning_metric():
     parser.add_argument(
         "-n",
         "--number_of_clusters",
-        metavar='', required=True,
+        metavar='', required=True,type=int,
         help=" number of cluster under consideration"
     )
 
