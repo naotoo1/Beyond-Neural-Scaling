@@ -41,7 +41,7 @@ Markdown==3.4.1
 MarkupSafe==2.1.1
 matplotlib==3.6.2
 MDP==3.6
-mpmath==1.2.1
+mpmath==1.3.0
 multidict==6.0.4
 multimethod==1.9
 networkx==2.8.8
