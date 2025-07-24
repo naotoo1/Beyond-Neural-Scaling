@@ -59,7 +59,7 @@ paramz==0.9.5
 patsy==0.5.3
 Pillow==10.3.0
 prosemble==0.0.4
-protobuf==3.19.6
+protobuf==4.25.8
 prototorch==0.7.5
 prototorch-models==0.5.2
 pyasn1==0.4.8
